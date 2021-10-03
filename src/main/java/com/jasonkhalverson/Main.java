@@ -1,8 +1,16 @@
 package com.jasonkhalverson;
 
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+        EncryptionMachine encryptionMachine = new EncryptionMachine();
+        Scanner scanner = new Scanner(System.in);
+
+        encryptionMachine.displayWelcomeMessage();
+
+        encryptionMachine.retrieveKey(scanner);
     }
+
 }

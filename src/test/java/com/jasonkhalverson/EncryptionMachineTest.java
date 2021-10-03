@@ -1,10 +1,9 @@
 package com.jasonkhalverson;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
@@ -48,12 +47,13 @@ class EncryptionMachineTest {
 
     @Test
     void retrieveKey(){
-        String testingKey = "car";
+        String testingKey = "quick";
+        String encryptedKey = "txlfn";
 
         encryptionMachine.retrieveKey(new Scanner(new ByteArrayInputStream(testingKey.getBytes())));
 
-        assertEquals(testingKey, encryptionMachine.getKey());
-        assertEquals("Enter key: \nKey is: "+testingKey+"\n", outContent.toString());
+        assertEquals(encryptedKey, encryptionMachine.getKey());
+        assertEquals("Enter key: Key is: " + encryptedKey + "\n", outContent.toString());
     }
 
     @Test

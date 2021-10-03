@@ -17,15 +17,9 @@ public class EncryptionMachine {
     }
 
     public void retrieveKey(Scanner scanner) {
-        System.out.println("Enter key: ");
+        System.out.print("Enter key: ");
 
-        StringBuilder retrievedKey = new StringBuilder();
-
-        while(scanner.hasNext()){
-            retrievedKey.append(scanner.next());
-        }
-
-        key = retrievedKey.toString();
+        key = encryptWord(scanner.nextLine());
         System.out.println("Key is: " + key);
     }
 
