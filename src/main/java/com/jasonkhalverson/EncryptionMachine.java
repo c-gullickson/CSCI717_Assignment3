@@ -37,4 +37,14 @@ public class EncryptionMachine {
 
         return (char) (indexOfShiftedLetter + ALPHABET.charAt(0));
     }
+
+    public String encryptWord(String word) {
+        StringBuilder encryptedWord = new StringBuilder();
+
+        for(char letter: word.toCharArray()){
+            encryptedWord.append(encryptLetter(letter));
+        }
+
+        return encryptedWord.toString();
+    }
 }

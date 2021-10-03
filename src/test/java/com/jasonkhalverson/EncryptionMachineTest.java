@@ -67,4 +67,12 @@ class EncryptionMachineTest {
         char encryptedKey = encryptionMachine.encryptLetter('y');
         assertEquals('b', encryptedKey);
     }
+
+    @Test
+    void testWordEncrypt(){
+        String wordToEncrypt = "the";
+        String testEncryptedWord = "wkh";
+        String encryptedWord = encryptionMachine.encryptWord(wordToEncrypt);
+        assertEquals(testEncryptedWord, encryptedWord);
+    }
 }
