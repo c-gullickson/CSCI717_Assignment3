@@ -6,6 +6,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,23 +18,20 @@ class EncryptionMachineTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
 
-    // Used to test the Scanner.in
-    InputStream sysInBackup = System.in; // backup System.in to restore it later
-
-
+    private EncryptionMachine encryptionMachine;
 
     @BeforeEach
-    public void setUpInputOutputStreams() {
+    public void setUp() {
+        // Setup output stream
         System.setOut(new PrintStream(outContent));
+
+        encryptionMachine = new EncryptionMachine();
     }
 
     @AfterEach
     public void restoreStreams() {
         // Reset System.out
         System.setOut(originalOut);
-
-        // Reset System.in to its original
-        System.setIn(sysInBackup);
     }
 
     @Test
@@ -50,23 +48,23 @@ class EncryptionMachineTest {
 
     @Test
     void retrieveKey(){
-        EncryptionMachine encryptionMachine = new EncryptionMachine();
         String testingKey = "car";
 
-        // Used to test the Scanner.in
-        ByteArrayInputStream in = new ByteArrayInputStream(testingKey.getBytes());
-        System.setIn(in);
-
-        encryptionMachine.retrieveKey();
+        encryptionMachine.retrieveKey(new Scanner(new ByteArrayInputStream(testingKey.getBytes())));
 
         assertEquals(testingKey, encryptionMachine.getKey());
         assertEquals("Enter key: \nKey is: "+testingKey+"\n", outContent.toString());
-
     }
 
     @Test
-    void encryptLetter(){
-        EncryptionMachine encryptionMachine = new EncryptionMachine();
-        encryptionMachine.encryptLetter("a");
+    void testEncryptLetter(){
+        char encryptedKey = encryptionMachine.encryptLetter('a');
+        assertEquals('d', encryptedKey);
+    }
+
+    @Test
+    void testEncryptLetterWrapAround(){
+        char encryptedKey = encryptionMachine.encryptLetter('y');
+        assertEquals('b', encryptedKey);
     }
 }

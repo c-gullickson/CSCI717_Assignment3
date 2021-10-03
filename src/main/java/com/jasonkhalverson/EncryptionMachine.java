@@ -17,18 +17,25 @@ public class EncryptionMachine {
         System.out.println(displayMessage);
     }
 
-    public void retrieveKey() {
-        Scanner scanner = new Scanner(System.in);
+    public void retrieveKey(Scanner scanner) {
         System.out.println("Enter key: ");
 
+        StringBuilder retrievedKey = new StringBuilder();
+
         while(scanner.hasNext()){
-            key += scanner.next();
+            retrievedKey.append(scanner.next());
         }
 
+        key = retrievedKey.toString();
         System.out.println("Key is: " + key);
     }
 
-    public void encryptLetter(final String a) {
+    public char encryptLetter(final char character) {
 
+        int indexOfLetter = character - ALPHABET.charAt(0);
+
+        int indexOfShiftedLetter = (indexOfLetter + SHIFT) % 26;
+
+        return (char) (indexOfShiftedLetter + ALPHABET.charAt(0));
     }
 }
