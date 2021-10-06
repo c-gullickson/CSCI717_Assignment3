@@ -53,7 +53,7 @@ class EncryptionMachineTest {
         encryptionMachine.retrieveKey(new Scanner(new ByteArrayInputStream(testingKey.getBytes())));
 
         assertEquals(encryptedKey, encryptionMachine.getKey());
-        assertEquals("Enter key: Key is: " + encryptedKey + "\n", outContent.toString());
+        assertEquals("Enter key: \"" + testingKey + "\" has been encrypted to: "+ encryptedKey + "\n\n", outContent.toString());
     }
 
     @Test
@@ -70,8 +70,8 @@ class EncryptionMachineTest {
 
     @Test
     void testWordEncrypt(){
-        String wordToEncrypt = "the";
-        String testEncryptedWord = "wkh";
+        final String wordToEncrypt = "the";
+        final String testEncryptedWord = "wkh";
         String encryptedWord = encryptionMachine.encryptWord(wordToEncrypt);
         assertEquals(testEncryptedWord, encryptedWord);
     }

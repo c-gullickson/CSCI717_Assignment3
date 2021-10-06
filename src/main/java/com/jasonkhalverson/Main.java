@@ -11,6 +11,9 @@ public class Main {
         encryptionMachine.displayWelcomeMessage();
 
         encryptionMachine.retrieveKey(scanner);
-    }
 
+        encryptionMachine.encryptMultipleWords(scanner);
+
+        encryptionMachine.displayExitMessage();
+    }
 }

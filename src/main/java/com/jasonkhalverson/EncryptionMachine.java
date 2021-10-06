@@ -4,11 +4,12 @@ import lombok.Data;
 
 import java.util.Scanner;
 
+//TODO: Add header comments for JavaDocs
 @Data
 public class EncryptionMachine {
-    private String key = "";
-    private final int SHIFT = 3;
     public static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
+    private final int SHIFT = 3;
+    private String key = "";
 
     public void displayWelcomeMessage(){
         System.out.println("Welcome to the CSCI717 Encryption Machine Construction\n"
@@ -19,8 +20,9 @@ public class EncryptionMachine {
     public void retrieveKey(Scanner scanner) {
         System.out.print("Enter key: ");
 
-        key = encryptWord(scanner.nextLine());
-        System.out.println("Key is: " + key);
+        String word = scanner.nextLine();
+        key = encryptWord(word);
+        System.out.println("\"" + word + "\" has been encrypted to: " + key + "\n");
     }
 
     public char encryptLetter(final char character) {
@@ -40,5 +42,25 @@ public class EncryptionMachine {
         }
 
         return encryptedWord.toString();
+    }
+
+    public void displayExitMessage() {
+        System.out.println("Message fully encrypted. Happy secret messaging!");
+    }
+
+    public void encryptMultipleWords(Scanner scanner) {
+        int numberOfWords = getNumberOfWords(scanner);
+
+        for(int i = 0; i < numberOfWords; i++){
+            System.out.println("Next word:");
+            String word = scanner.nextLine();
+            System.out.println("\"" + word + "\" has been encrypted to: " + encryptWord(word) + "\n");
+        }
+    }
+
+    private int getNumberOfWords(final Scanner scanner) {
+        System.out.println("How many words is your message?:");
+        int numberOfWords = Integer.parseInt(scanner.nextLine());
+        return numberOfWords;
     }
 }
