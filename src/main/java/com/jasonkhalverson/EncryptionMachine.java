@@ -53,7 +53,7 @@ public class EncryptionMachine {
      *
      * @param word to encrypt letter by letter
      * @return encrypted string
-     * @see encryptLetter()
+     * @link encryptLetter(final char character)
      */
     public String encryptWord(String word) {
         StringBuilder encryptedWord = new StringBuilder();
