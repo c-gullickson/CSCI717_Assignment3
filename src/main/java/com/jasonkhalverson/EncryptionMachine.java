@@ -1,11 +1,14 @@
 package com.jasonkhalverson;
 
-import lombok.Data;
-
 import java.util.Scanner;
 
-//TODO: Add header comments for JavaDocs
-@Data
+/**
+ * Encryption machine built for CSCI 717
+ * <p>
+ *  This class handles the display and encryption of a key and several words
+ * </p>
+ * @author Jason Halverson
+ */
 public class EncryptionMachine {
     public static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
     private final int SHIFT = 3;
@@ -17,6 +20,10 @@ public class EncryptionMachine {
                 + "with a key for your recipient to decrypt!");
     }
 
+    /**
+     * Retrieve the key for future decryption
+     * @param scanner
+     */
     public void retrieveKey(Scanner scanner) {
         System.out.print("Enter key: ");
 
@@ -25,6 +32,14 @@ public class EncryptionMachine {
         System.out.println("\"" + word + "\" has been encrypted to: " + key + "\n");
     }
 
+    /**
+     * Encrypts a single char utilizing the Caesar shift cypher
+     * <p>
+     *     The shift value is currently statically set.
+     * <p/>
+     * @param character to encrypt
+     * @return char is the encrypted value.
+     */
     public char encryptLetter(final char character) {
 
         int indexOfLetter = character - ALPHABET.charAt(0);
@@ -34,6 +49,12 @@ public class EncryptionMachine {
         return (char) (indexOfShiftedLetter + ALPHABET.charAt(0));
     }
 
+    /**
+     *
+     * @param word to encrypt letter by letter
+     * @return encrypted string
+     * @see encryptLetter()
+     */
     public String encryptWord(String word) {
         StringBuilder encryptedWord = new StringBuilder();
 
@@ -48,6 +69,10 @@ public class EncryptionMachine {
         System.out.println("Message fully encrypted. Happy secret messaging!");
     }
 
+    /**
+     * Encrypts multiple words based on the input the user.
+     * @param scanner
+     */
     public void encryptMultipleWords(Scanner scanner) {
         int numberOfWords = getNumberOfWords(scanner);
 
@@ -58,9 +83,16 @@ public class EncryptionMachine {
         }
     }
 
+    /**
+     *
+     * @param scanner to retrieve input
+     * @return number of words to be encrypted.
+     */
     private int getNumberOfWords(final Scanner scanner) {
         System.out.println("How many words is your message?:");
         int numberOfWords = Integer.parseInt(scanner.nextLine());
         return numberOfWords;
     }
+
+    public String getKey() {return this.key;}
 }
